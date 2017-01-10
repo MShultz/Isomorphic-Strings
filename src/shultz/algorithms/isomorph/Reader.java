@@ -28,4 +28,12 @@ public class Reader {
 		}
 		return currentWord;
 	}
+	
+	public void closeReader(){
+		try {
+			file.close();
+		} catch (IOException e) {
+			System.out.println("Error: Unable to propperly close input file.");
+		}
+	}
 }
