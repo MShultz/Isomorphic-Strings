@@ -35,4 +35,9 @@ public class Identifier {
 		}
 		return pattern;
 	}
+	
+	public String identifyLooseIsomorphicPattern(String currentWord){
+		String pattern = "";
+		return null;
+	}
 }
