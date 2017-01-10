@@ -55,13 +55,13 @@ public class Identifier {
 			String currentChar = currentWord.charAt(i) + "";
 			int firstIndexOfChar = currentWord.indexOf(currentChar);
 			if (firstIndexOfChar < i) {
-				pattern += firstIndexOfChar;
+				pattern += " " + firstIndexOfChar;
 			} else {
-				pattern += count;
+				pattern += " " + count;
 				++count;
 			}
 		}
-		return pattern;
+		return pattern.trim();
 	}
 
 	private String identifyLooseIsomorphicPattern(String currentWord) {
@@ -69,9 +69,9 @@ public class Identifier {
 		List<Integer> loosePattern = new ArrayList<Integer>(getCharacterMapping(currentWord).values());
 		Collections.sort(loosePattern);
 		for (Integer count : loosePattern) {
-			pattern += count;
+			pattern += " " + count;
 		}
-		return pattern;
+		return pattern.trim();
 	}
 
 	private HashMap<Character, Integer> getCharacterMapping(String currentWord) {

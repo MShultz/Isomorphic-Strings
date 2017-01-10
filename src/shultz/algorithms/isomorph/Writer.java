@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 public class Writer {
 	Storage isomorphStorage;
@@ -56,17 +57,22 @@ public class Writer {
 	public void writeToFile() {
 		try {
 			setLists();
-			writeExactIsomorphList(exactIsomorphs.keySet().iterator());
-			writeLooseIsomorphList(looseIsomorphs.keySet().iterator());
+			results.write(EXACT_TITLE);
+			results.newLine();
+			writeExactIsomorphList(exactIsomorphs.keySet());
+			results.write(LOOSE_TITLE);
+			results.newLine();
+			writeLooseIsomorphList(looseIsomorphs.keySet());
 			writeNonIsomorphicList();
 		} catch (IOException e) {
 			System.out.println("Error: Unable to write to output file");
 		}
 	}
 
-	public void writeExactIsomorphList(Iterator<String> keys) throws IOException {
-		results.write(EXACT_TITLE);
-		results.newLine();
+	public void writeExactIsomorphList(Set<String> allKeys) throws IOException {
+		ArrayList<String> keyList = new ArrayList<String>(allKeys);
+		Collections.sort(keyList);
+		Iterator<String> keys = keyList.iterator();
 		while (keys.hasNext()) {
 			String currentKey = keys.next();
 			String output = currentKey + ":";
@@ -86,9 +92,10 @@ public class Writer {
 		return currentList;
 	}
 
-	public void writeLooseIsomorphList(Iterator<String> keys) throws IOException {
-		results.write(LOOSE_TITLE);
-		results.newLine();
+	public void writeLooseIsomorphList(Set<String> allKeys) throws IOException {
+		ArrayList<String> keyList = new ArrayList<String>(allKeys);
+		Collections.sort(keyList);
+		Iterator<String> keys = keyList.iterator();
 		while (keys.hasNext()) {
 			String currentKey = keys.next();
 			String output = currentKey + ":";
