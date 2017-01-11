@@ -1,7 +1,6 @@
 package shultz.algorithms.isomorph;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,19 +48,20 @@ public class Identifier {
 	}
 
 	private String identifyExactIsomorphicPattern(String currentWord) {
+		HashMap<String, Integer> currentCharacters = new HashMap<String,Integer>();
 		String pattern = "";
 		int count = 0;
-		for (int i = 0; i < currentWord.length(); ++i) {
+		for(int i=0; i < currentWord.length(); ++i){
 			String currentChar = currentWord.charAt(i) + "";
-			int firstIndexOfChar = currentWord.indexOf(currentChar);
-			if (firstIndexOfChar < i) {
-				pattern += " " + firstIndexOfChar;
-			} else {
+			if(currentCharacters.containsKey(currentChar)){
+				pattern += " " + currentCharacters.get(currentChar);
+			}else{
+				currentCharacters.put(currentChar, count);
 				pattern += " " + count;
 				++count;
 			}
 		}
-		return pattern.trim();
+		return pattern;
 	}
 
 	private String identifyLooseIsomorphicPattern(String currentWord) {
@@ -85,10 +85,5 @@ public class Identifier {
 			}
 		}
 		return loosePattern;
-	}
-	
-	public String identifyLooseIsomorphicPattern(String currentWord){
-		String pattern = "";
-		return null;
 	}
 }
